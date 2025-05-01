@@ -111,3 +111,4 @@ const styles = StyleSheet.create({
 
 // 編集しました。
 //HiTaが打ちました
+// murai
