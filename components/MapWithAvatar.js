@@ -105,3 +105,8 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
 });
+
+
+
+
+// 編集しました。
