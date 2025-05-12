@@ -125,7 +125,7 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const isValidGmail = (email) => {
+  const isValidKYODAImail = (email) => {
     return /^[a-zA-Z0-9._%+-]+@st\.kyoto-u\.ac\.jp$/.test(email);
   };
 
@@ -133,7 +133,7 @@ const LoginPage = () => {
     e.preventDefault();
     setError("");
 
-    if (!isValidGmail(email)) {
+    if (!isValidKYODAImail(email)) {
       setError("st.kyoto-u.ac.jp のメールアドレスのみ使用できます。");
       return;
     }
@@ -144,7 +144,7 @@ const LoginPage = () => {
     }
 
     // プロトタイプ用の仮ログイン処理
-    if (email === "test@gmail.com" && password === "password") {
+    if (email === "test@st.kyoto-u.ac.jp" && password === "password") {
       localStorage.setItem("token", "dummy-token");
       navigate("/dashboard");
     } else {
