@@ -111,3 +111,72 @@ const styles = StyleSheet.create({
 
 // 編集しました。
 //HiTaが打ちました
+
+
+
+//ログイン機能のつもりです。
+// LoginPage.jsx
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const isValidGmail = (email) => {
+    return /^[a-zA-Z0-9._%+-]+@st\.kyoto-u\.ac\.jp$/.test(email);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!isValidGmail(email)) {
+      setError("st.kyoto-u.ac.jp のメールアドレスのみ使用できます。");
+      return;
+    }
+
+    if (!password) {
+      setError("パスワードを入力してください。");
+      return;
+    }
+
+    // プロトタイプ用の仮ログイン処理
+    if (email === "test@gmail.com" && password === "password") {
+      localStorage.setItem("token", "dummy-token");
+      navigate("/dashboard");
+    } else {
+      setError("メールアドレスまたはパスワードが違います。");
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: "400px", margin: "100px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "8px" }}>
+      <h2>ログイン</h2>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          value={email}
+          placeholder="メールアドレス (gmail.com 限定)"
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
+        />
+        <input
+          type="password"
+          value={password}
+          placeholder="パスワード"
+          onChange={(e) => setPassword(e.target.value)}
+          style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
+        />
+        <button type="submit" style={{ width: "100%", padding: "10px" }}>
+          ログイン
+        </button>
+      </form>
+      {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+    </div>
+  );
+};
+
+export default LoginPage;
